@@ -3,9 +3,11 @@
 
 let 
   unstableTarball = fetchTarball https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz;
+  catppuccinTarball = fetchTarball https://github.com/catppuccin/nix/archive/main.tar.gz
 in {
   imports = [
-    <catppuccin/modules/home-manager>
+#    <catppuccin/modules/home-manager>
+    (import "$(catppuccinTarball)/modules/home-manager")
   ];
 
   home.username = "kinvp";
@@ -45,6 +47,7 @@ in {
   };
   
   home.sessionVariables = {
+  
   };
 
   gtk = {
@@ -76,7 +79,7 @@ in {
       syntaxHighlighting.enable = true;
 
       shellAliases = {
-        nixsw = "sudo nixos-rebuild switch";
+        nixsw = "sudo nixos-rebuild switch --flake ~/.dotfiles/";
         homesw = "home-manager switch";
         clear = "clear && pfetch";
         };
