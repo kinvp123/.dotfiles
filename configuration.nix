@@ -2,15 +2,12 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
-let
-  homeManagerTarball = fetchTarball https://github.com/nix-community/home-manager/archive/release-24.05.tar.gz;
-in {
+{ pkgs, ... }:
+
+{
   imports =
     [
       ./hardware-configuration.nix
-      (import "$(homeManagerTarball)/nixos")
-      ./home.nix
     ];
 
   # Bootloader.
