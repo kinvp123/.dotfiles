@@ -5,7 +5,7 @@ let
   unstableTarball = fetchTarball https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz;
 in {
   imports = [
-    <catppuccin/modules/home-manager>
+
   ];
 
   home.username = "kinvp";
@@ -32,6 +32,8 @@ in {
     lolcat
     catppuccin-gtk
     icu
+    bitwarden
+    tofi
     unstable.ungoogled-chromium
     unstable.prismlauncher
     unstable.tetrio-desktop
@@ -41,10 +43,34 @@ in {
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
   home.file = {
-
   };
   
   home.sessionVariables = {
+
+  };
+
+  wayland = {
+    windowManager = {
+      hyprland = {
+        enable = true;
+        package = pkgs.hyprland;
+        settings = {
+          monitor = [
+            "HDMI-A-1, 1920x1080@75, 0x0, 1"
+            "DP-4, 1920x1080@60, auto, 1"
+          ];
+          general = {
+            gaps_in = 4;
+            gaps_out  = 16;
+            "col.active_border" = "rgb(f5c2e7) rgb(cba6f7) 45deg";
+          };
+          bind = [
+            "SUPER, Return, exec, kitty"
+            "SUPER, Q, killactive"
+          ];
+        };
+      };
+    };
   };
 
   gtk = {
@@ -76,8 +102,8 @@ in {
       syntaxHighlighting.enable = true;
 
       shellAliases = {
-        nixsw = "sudo nixos-rebuild switch";
-        homesw = "home-manager switch";
+        nixsw = "sudo nixos-rebuild switch --flake $HOME/.dotfiles/";
+        homesw = "home-manager switch --flake $HOME/.dotfiles/ --impure";
         clear = "clear && pfetch";
         };
     };
