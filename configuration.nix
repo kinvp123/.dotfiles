@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ pkgs, ... }:
+{ config, inputs, pkgs, ... }:
 
 {
   imports =
@@ -52,22 +52,22 @@
   };
 
   services = {
-	xserver = {
-		enable = true;
-		xkb.layout = "us";
-		xkb.variant = "";
-	};
+	  xserver = {
+		  enable = true;
+		  xkb.layout = "us";
+		  xkb.variant = "";
+	  };
 
-	displayManager.sddm.enable = true;
-	desktopManager.plasma6.enable = true;
+	  displayManager.sddm.enable = true;
+	  desktopManager.plasma6.enable = true;
 
-	pipewire = {
-    		enable = true;
-    		alsa.enable = true;
-    		alsa.support32Bit = true;
-    		pulse.enable = true;
-	};
-	flatpak.enable = true;
+	  pipewire = {
+    	enable = true;
+    	alsa.enable = true;
+    	alsa.support32Bit = true;
+    	pulse.enable = true;
+	  };
+	  flatpak.enable = true;
   };
 
   # Enable sound with pipewire.
@@ -90,8 +90,11 @@
       dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
       localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
     };
+    hyprland = {
+      enable = true;
+      package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
+    };
     gamemode.enable = true;
-    hyprland.enable = true;
   };
 
   # Allow unfree packages
@@ -99,7 +102,7 @@
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = with pkgs; [ steam-run fuse fuse3 ];
+  environment.systemPackages = with pkgs; [ steam-run fuse fuse3 xdg-desktop-portal-hyprland];
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

@@ -5,7 +5,7 @@ let
   unstableTarball = fetchTarball https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz;
 in {
   imports = [
-
+   ~/.dotfiles/modules/hyprland/hyprcfg.nix
   ];
 
   home.username = "kinvp";
@@ -34,51 +34,28 @@ in {
     icu
     bitwarden
     tofi
+    waybar
     unstable.ungoogled-chromium
     unstable.prismlauncher
     unstable.tetrio-desktop
     unstable.osu-lazer-bin
   ];
 
-  # Home Manager is pretty good at managing dotfiles. The primary way to manage
-  # plain files is through 'home.file'.
-  home.file = {
+  xdg.configFile = { # For use with ~/.config/ files
+    "waybar/config.jsonc".source = ~/.dotfiles/modules/waybar/config.jsonc;
+    "waybar/style.css".source = ~/.dotfiles/modules/waybar/style.css;
+  };
+
+  home.file = { # For use with ~/ files
+
   };
   
   home.sessionVariables = {
 
   };
 
-  wayland = {
-    windowManager = {
-      hyprland = {
-        enable = true;
-        package = pkgs.hyprland;
-        settings = {
-          monitor = [
-            "HDMI-A-1, 1920x1080@75, 0x0, 1"
-            "DP-4, 1920x1080@60, auto, 1"
-          ];
-          general = {
-            gaps_in = 4;
-            gaps_out  = 16;
-            "col.active_border" = "rgb(f5c2e7) rgb(cba6f7) 45deg";
-          };
-          bind = [
-            "SUPER, Return, exec, kitty"
-            "SUPER, Q, killactive"
-            "SUPER, D, exec $(tofi-drun)"
-
-            
-          ];
-        };
-      };
-    };
-  };
-
   gtk = {
     enable = true;
-    catppuccin.enable = true;
   };
 
   programs = {
