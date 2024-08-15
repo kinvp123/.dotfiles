@@ -2,10 +2,14 @@
 
 
 let 
-  unstableTarball = fetchTarball https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz;
+  unstableTarball = builtins.fetchTarball {
+    url = https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz;
+  };
 in {
-  imports = [
-   ~/.dotfiles/modules/hyprland/hyprcfg.nix
+  imports = [ 
+  ./modules/hyprland/hyprcfg.nix
+  ./modules/theming/gtkcfg.nix
+  ./modules/theming/qtcfg.nix
   ];
 
   home.username = "kinvp";
@@ -42,8 +46,8 @@ in {
   ];
 
   xdg.configFile = { # For use with ~/.config/ files
-    "waybar/config.jsonc".source = ~/.dotfiles/modules/waybar/config.jsonc;
-    "waybar/style.css".source = ~/.dotfiles/modules/waybar/style.css;
+#    "waybar/config.jsonc".source = ./modules/waybar/config.jsonc;
+#    "waybar/style.css".source = ./modules/waybar/style.css;
   };
 
   home.file = { # For use with ~/ files
