@@ -67,6 +67,9 @@ in {
           bind = [
             "SUPER, Return, exec, kitty"
             "SUPER, Q, killactive"
+            "SUPER, D, exec $(tofi-drun)"
+
+            
           ];
         };
       };

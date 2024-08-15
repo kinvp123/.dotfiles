@@ -1,0 +1,105 @@
+{
+    "reload_style_on_change": true,
+    "layer": "top",
+    "output": "HDMI-A-4",
+    "height": 36,
+    "margin-top": 10,
+    "margin-left": 14,
+    "margin-right": 14,
+    "margin-bottom": 10,
+    "spacing": 12,
+    "modules-left": ["custom/blank", "group/group-power", "custom/separator", "sway/workspaces", "custom/separator","sway/window"],
+    "modules-center": ["clock"],
+    "modules-right": ["disk", "custom/separator", "cpu", "custom/separator","memory", "custom/separator","pulseaudio", "custom/blank"],
+    "sway/window": {
+        "max-length": 50
+    },
+    "sway/workspaces": {
+        "all-outputs": true
+    },
+    "clock": {
+        "format": "󰣇  {:%H:%M, %a}",
+        "format-alt": "{:%a, %d. %b %Y - %H:%M}"
+    },
+    "cpu": {
+        "interval": 5,
+        "format": " {usage}%, {avg_frequency}GHz avg"
+    },
+    "disk": {
+        "tooltip": true,
+        "tooltip-format": "{path} - {free} ({percentage_free}%) out of {total} avalible.",
+        "interval": 30,
+        "format": "  {percentage_used}%"
+    },
+    "pulseaudio": {
+        "scroll-step": 2.5, // %, can be a float
+        "format": "{volume}% {icon} {format_source}",
+        "format-bluetooth": "{volume}% {icon} {format_source}",
+        "format-bluetooth-muted": " {icon} {format_source}",
+        "format-muted": " {format_source}",
+        "format-source": "{volume}% ",
+        "format-source-muted": "",
+        "format-icons": {
+            "headphone": "",
+            "hands-free": "",
+            "headset": "",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": ["", "", ""]
+        },
+        "on-click": "pavucontrol"
+    },
+    "memory": {
+        "interval": 15,
+        "format": "{percentage}%  - {swapPercentage}% 󱛟",
+        "tooltip": true,
+        "tooltip-format": "{avail}GB of {total}GB - {swapAvail}GB of {swapTotal}GB swap available."
+    },
+    "custom/blank": {
+        "format": "  "
+    },
+    "custom/separator": {
+        "format": "|"
+    },
+    "group/group-power": {
+        "orientation": "horizontal",
+        "drawer": {
+            "transition-duration": 500,
+            "children-class": "not-power",
+            "transition-left-to-right": true
+        },
+        "modules": [
+            "custom/power", // First element is the "group leader" and won't ever be hidden
+            "custom/suspend",
+            "custom/reboot",
+            "custom/quit",
+            "custom/lock"
+        ]
+    },
+    "custom/suspend": {
+        "format": "    󰤄  ",
+        "tooltip": false,
+        "on-double-click": "systemctl suspend"
+    },
+    "custom/quit": {
+        "format": "  󰗼  ",
+        "tooltip": false,
+        "on-double-click": "hyprctl dispatch exit"
+    },
+    "custom/lock": {
+        "format": "  󰍁  ",
+        "tooltip": false,
+        "on-double-click": "hyprlock"
+    },
+    "custom/reboot": {
+        "format": "  󰜉  ",
+        "tooltip": false,
+        "on-double-click": "reboot"
+    },
+    "custom/power": {
+        "format": "",
+        "tooltip": false,
+        "on-double-click": "shutdown now"
+    }
+}
