@@ -1,32 +1,22 @@
-{ config, pkgs, ... }:
+{ pkgs-unstable, config, pkgs, lib, ... }:
 
 
-let 
-  unstableTarball = builtins.fetchTarball {
-    url = https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz;
+{
+  nixpkgs.config = {
+    allowUnfreePredicate = _: true;
   };
-in {
+
   imports = [ 
-  ~/.dotfiles/modules/hyprland/hyprcfg.nix
-  ~/.dotfiles/modules/theming/gtkcfg.nix
-  ~/.dotfiles/modules/theming/qtcfg.nix
+    ./modules/hyprland/hyprcfg.nix
+    ./modules/theming/gtkqt.nix
   ];
 
   home.username = "kinvp";
   home.homeDirectory = "/home/kinvp";
 
-  nixpkgs.config = {
-    allowUnfree = true;
-    packageOverrides = pkgs: {
-      unstable = import unstableTarball {
-        config = config.nixpkgs.config;
-      };
-    };
-  };
-
   home.stateVersion = "24.05"; # Please read the comment before changing.
 
-  home.packages = with pkgs; [
+  home.packages = (with pkgs; [
 	  pfetch-rs
 	  mangohud
 	  wget
@@ -39,14 +29,17 @@ in {
     bitwarden
     tofi
     waybar
-    unstable.ungoogled-chromium
-    unstable.prismlauncher
-    unstable.tetrio-desktop
-    unstable.osu-lazer-bin
-  ];
+  ])
+  ++
+  (with pkgs-unstable; [
+    ungoogled-chromium
+    prismlauncher
+    tetrio-desktop
+    osu-lazer-bin
+  ]);
 
   xdg.configFile = { # For use with ~/.config/ files
-#    "waybar/config.jsonc".source = ~/.dotfiles/modules/waybar/config.jsonc;
+#   "waybar/config.jsonc".source = ~/.dotfiles/modules/waybar/config.jsonc;
 #    "waybar/style.css".source = ~/.dotfiles/modules/waybar/style.css;
   };
 
@@ -56,10 +49,6 @@ in {
   
   home.sessionVariables = {
 
-  };
-
-  gtk = {
-    enable = true;
   };
 
   programs = {
@@ -87,7 +76,8 @@ in {
 
       shellAliases = {
         nixsw = "sudo nixos-rebuild switch --flake $HOME/.dotfiles/";
-        homesw = "home-manager switch --flake $HOME/.dotfiles/ --impure";
+        homesw = "NIXPKGS_ALLOW_UNFREE=1 home-manager switch --flake $HOME/.dotfiles/ --impure";
+        # ENV_VAR and --impure forced, allowUnfree does not work.
         clear = "clear && pfetch";
         };
     };
@@ -106,6 +96,7 @@ in {
     };
     home-manager.enable = true;
     alacritty.enable = true;
+    firefox.enable = true;
   };  
 }
 

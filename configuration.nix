@@ -59,7 +59,7 @@
 	  };
 
 	  displayManager.sddm.enable = true;
-	  desktopManager.plasma6.enable = true;
+#	  desktopManager.plasma6.enable = false;
 
 	  pipewire = {
     	enable = true;
