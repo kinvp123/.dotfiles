@@ -24,11 +24,15 @@
             gaps_out  = 16;
             "col.active_border" = "rgb(f5c2e7) rgb(cba6f7) 45deg";
           };
+
+          "exec-once" = "waybar";
+
           bind = [
             "SUPER, Return, exec, kitty"
             "SUPER, Q, killactive"
             "SUPER, D, exec, $(tofi-drun)"
             "SUPER_SHIFT, D, exec, $(tofi-run)"
+            "CTRL_ALT, Backspace, exit"
 
             "SUPER, 1, workspace, 1"
             "SUPER, 2, workspace, 2"

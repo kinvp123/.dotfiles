@@ -6,7 +6,7 @@
     "margin-top": 10,
     "margin-left": 14,
     "margin-right": 14,
-    "margin-bottom": 10,
+    "margin-bottom": 0,
     "spacing": 12,
     "modules-left": ["custom/blank", "group/group-power", "custom/separator", "hyprland/workspaces", "custom/separator","hyprland/window"],
     "modules-center": ["clock"],

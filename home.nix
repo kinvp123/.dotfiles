@@ -1,14 +1,10 @@
 { pkgs-unstable, config, pkgs, lib, ... }:
 
-
 {
-  nixpkgs.config = {
-    allowUnfreePredicate = _: true;
-  };
-
   imports = [ 
     ./modules/hyprland/hyprcfg.nix
     ./modules/theming/gtkqt.nix
+    ./modules/waybar/waybarcfg.nix
   ];
 
   home.username = "kinvp";
@@ -29,27 +25,15 @@
     bitwarden
     tofi
     waybar
+    pavucontrol
+    # Remember to wrap overrides in ()
+    (nerdfonts.override {fonts = ["NerdFontsSymbolsOnly"];})
   ])
   ++
   (with pkgs-unstable; [
     ungoogled-chromium
     prismlauncher
-    tetrio-desktop
-    osu-lazer-bin
   ]);
-
-  xdg.configFile = { # For use with ~/.config/ files
-#   "waybar/config.jsonc".source = ~/.dotfiles/modules/waybar/config.jsonc;
-#    "waybar/style.css".source = ~/.dotfiles/modules/waybar/style.css;
-  };
-
-  home.file = { # For use with ~/ files
-
-  };
-  
-  home.sessionVariables = {
-
-  };
 
   programs = {
     vscode = {
