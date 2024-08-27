@@ -5,6 +5,8 @@
     ./modules/hyprland/hyprcfg.nix
     ./modules/theming/gtkqt.nix
     ./modules/waybar/waybarcfg.nix
+    ./modules/wpaperd/wpapercfg.nix
+    ./modules/tofi/toficfg.nix
   ];
 
   home.username = "kinvp";

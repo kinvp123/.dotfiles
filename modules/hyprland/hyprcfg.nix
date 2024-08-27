@@ -25,7 +25,10 @@
             "col.active_border" = "rgb(f5c2e7) rgb(cba6f7) 45deg";
           };
 
-          "exec-once" = "waybar";
+          exec-once = [
+            "waybar"
+            "wpaperd -d"
+          ];
 
           bind = [
             "SUPER, Return, exec, kitty"
@@ -48,9 +51,16 @@
             "SUPER_SHIFT, 5, movetoworkspacesilent, 5"
             "SUPER_SHIFT, 6, movetoworkspacesilent, 6"
 
+            "SUPER, Space, togglefloating"
+
             ", Print, exec, hyprshot -m region -o ~/Pictures -s"
             "SUPER, Print, exec, hyprshot -m output -o ~/Pictures -s"
             "SUPER_SHIFT, Print, exec, hyprshot -m output -o ~/Pictures -s"
+          ];
+
+          bindm = [
+            "SUPER, mouse:272, movewindow"
+            "SUPER, mouse:273, resizewindow"
           ];
         };
       };
