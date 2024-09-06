@@ -1,4 +1,4 @@
 {config, pkgs, ...}:
 {
-  xdg.configFile."tofi/config".source = ../storage/configFiles;
+  xdg.configFile."tofi/config".source = ../storage/configFiles/config;
 }
