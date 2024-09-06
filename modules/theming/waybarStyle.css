@@ -37,8 +37,6 @@
 
 #waybar {
     background: @crust;
-    border: 1px solid @mauve;
-    border-radius: 20px;
 }
 
 /* Modules */
@@ -69,19 +67,19 @@
 }
 #disk {
     color: @rosewater;
-    font-weight: 600
+    font-weight: 400
 }
 #cpu {
     color: @flamingo;
-    font-weight: 600
+    font-weight: 400
 }
 #memory {
     color: @pink;
-    font-weight: 600
+    font-weight: 400
 }
 #pulseaudio {
     color: @mauve;
-    font-weight: 600
+    font-weight: 400
 }
 #workspaces button {
     padding: 0px

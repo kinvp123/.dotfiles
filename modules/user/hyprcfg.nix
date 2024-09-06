@@ -33,8 +33,8 @@
           bind = [
             "SUPER, Return, exec, kitty"
             "SUPER, Q, killactive"
-            "SUPER, D, exec, $(tofi-drun)"
-            "SUPER_SHIFT, D, exec, $(tofi-run)"
+            "SUPER, D, exec, $(tofi-drun --font ~/.dotfiles/modules/theming/fonts/Nunito-Regular.ttf)"
+            "SUPER_SHIFT, D, exec, $(tofi-run --font ~/.dotfiles/modules/theming/fonts/Nunito-Regular.ttf)"
             "CTRL_ALT, Backspace, exit"
 
             "SUPER, 1, workspace, 1"
