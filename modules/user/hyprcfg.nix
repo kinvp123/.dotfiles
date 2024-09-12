@@ -33,8 +33,8 @@
           bind = [
             "SUPER, Return, exec, kitty"
             "SUPER, Q, killactive"
-            "SUPER, D, exec, $(tofi-drun --font ~/.dotfiles/modules/theming/fonts/Nunito-Regular.ttf)"
-            "SUPER_SHIFT, D, exec, $(tofi-run --font ~/.dotfiles/modules/theming/fonts/Nunito-Regular.ttf)"
+            "SUPER, D, exec, $(tofi-drun --font ~/.dotfiles/modules/storage/fonts/Nunito-Regular.ttf)"
+            "SUPER_SHIFT, D, exec, $(tofi-run --font ~/.dotfiles/modules/storage/fonts/Nunito-Regular.ttf)"
             "CTRL_ALT, Backspace, exit"
 
             "SUPER, 1, workspace, 1"
@@ -43,6 +43,10 @@
             "SUPER, 4, workspace, 4"
             "SUPER, 5, workspace, 5"
             "SUPER, 6, workspace, 6"
+            "SUPER, 7, workspace, 7"
+            "SUPER, 8, workspace, 8"
+            "SUPER, 9, workspace, 9"
+            "SUPER, 10, workspace, 10"
 
             "SUPER_SHIFT, 1, movetoworkspacesilent, 1"
             "SUPER_SHIFT, 2, movetoworkspacesilent, 2"
@@ -50,8 +54,18 @@
             "SUPER_SHIFT, 4, movetoworkspacesilent, 4"
             "SUPER_SHIFT, 5, movetoworkspacesilent, 5"
             "SUPER_SHIFT, 6, movetoworkspacesilent, 6"
+            "SUPER_SHIFT, 7, movetoworkspacesilent, 7"
+            "SUPER_SHIFT, 8, movetoworkspacesilent, 8"
+            "SUPER_SHIFT, 9, movetoworkspacesilent, 9"
+            "SUPER_SHIFT, 10, movetoworkspacesilent, 10"
 
             "SUPER, Space, togglefloating"
+            "ALT, Space, centerfloating"
+
+            "SUPER, K, movefocus, l"
+            "SUPER, L, movefocus, d"
+            "SUPER, ;, movefocus, r"
+            "SUPER, O, movefocus, u"
 
             ", Print, exec, hyprshot -m region -o ~/Pictures -s"
             "SUPER, Print, exec, hyprshot -m output -o ~/Pictures -s"
