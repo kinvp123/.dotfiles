@@ -27,7 +27,6 @@
 
           exec-once = [
             "waybar"
-            "wpaperd -d"
           ];
 
           bind = [

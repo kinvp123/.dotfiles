@@ -15,10 +15,9 @@
     hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
     zen-browser.url = "github:MarceColl/zen-browser-flake";
     nix-gaming.url = "github:fufexan/nix-gaming";
-    playit-nixos-module.url = "github:pedorich-n/playit-nixos-module";
   };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, zen-browser, catppuccin, playit-nixos-module, ... } @ inputs: 
+  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, zen-browser, catppuccin, ... } @ inputs: 
   let
       system = "x86_64-linux";
       lib = nixpkgs.lib;
@@ -50,7 +49,6 @@
       inherit system;
       modules = [
         ./configuration.nix
-        playit-nixos-module.nixosModules.default
       ];
       specialArgs = {
         inherit inputs;

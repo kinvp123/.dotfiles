@@ -19,6 +19,7 @@
     pfetch-rs
     catppuccin-gtk
     lolcat
+    swww
 
     ## [FUNCTIONS] ##
     bitwarden
