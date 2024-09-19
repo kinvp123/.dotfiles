@@ -1,4 +1,4 @@
-{ zen-browser, pkgs-unstable, config, pkgs, lib, ... }:
+{ zen-browser, pkgs-unstable, pkgs-gaming, config, pkgs, lib, ... }:
 
 {
   imports = [ 

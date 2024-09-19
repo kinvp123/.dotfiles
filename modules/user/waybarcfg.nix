@@ -1,5 +1,5 @@
 { config, pkgs, lib, ... }:
 {
   xdg.configFile."waybar/config.jsonc".source = ../storage/configFiles/config.jsonc;
-  xdg.configFile."waybar/style.css".source = ../theming/waybarStyle.css;
+  xdg.configFile."waybar/style.css".source = ../theming/styleFiles/waybarStyle.css;
 }

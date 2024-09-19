@@ -46,7 +46,7 @@
             "SUPER, 7, workspace, 7"
             "SUPER, 8, workspace, 8"
             "SUPER, 9, workspace, 9"
-            "SUPER, 10, workspace, 10"
+            "SUPER, 0, workspace, 10"
 
             "SUPER_SHIFT, 1, movetoworkspacesilent, 1"
             "SUPER_SHIFT, 2, movetoworkspacesilent, 2"
@@ -57,15 +57,14 @@
             "SUPER_SHIFT, 7, movetoworkspacesilent, 7"
             "SUPER_SHIFT, 8, movetoworkspacesilent, 8"
             "SUPER_SHIFT, 9, movetoworkspacesilent, 9"
-            "SUPER_SHIFT, 10, movetoworkspacesilent, 10"
+            "SUPER_SHIFT, 0, movetoworkspacesilent, 10"
 
             "SUPER, Space, togglefloating"
-            "ALT, Space, centerfloating"
 
-            "SUPER, K, movefocus, l"
-            "SUPER, L, movefocus, d"
-            "SUPER, ;, movefocus, r"
-            "SUPER, O, movefocus, u"
+            "SUPER, J, movefocus, l"
+            "SUPER, K, movefocus, d"
+            "SUPER, L, movefocus, r"
+            "SUPER, I, movefocus, u"
 
             ", Print, exec, hyprshot -m region -o ~/Pictures -s"
             "SUPER, Print, exec, hyprshot -m output -o ~/Pictures -s"

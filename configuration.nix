@@ -21,6 +21,7 @@
   networking = {
     networkmanager.enable = true;
     nameservers = ["1.1.1.1" "1.0.0.1"];
+    firewall.allowedTCPPorts = [ 22 ];
   };
 
   # Set your time zone.
@@ -28,6 +29,7 @@
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
+
 
   i18n.extraLocaleSettings = {
     LC_ADDRESS = "vi_VN";
@@ -54,6 +56,13 @@
     	alsa.support32Bit = true;
     	pulse.enable = true;
 	  };
+
+    openssh = {
+      enable = true;
+    };
+    
+    displayManager.sddm.enable = true;
+    desktopManager.plasma6.enable = true;
 	  flatpak.enable = true;
   };
 
@@ -70,6 +79,13 @@
     ignoreShellProgramCheck = true;
   };
 
+  i18n.inputMethod = {
+    enabled = "ibus";
+    ibus.engines = with pkgs.ibus-engines; [
+      bamboo
+    ];
+  };
+
   programs = {
     steam = {
       enable = true;
@@ -82,10 +98,12 @@
       package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
     };
     gamemode.enable = true;
-
+  };
+  
   nixpkgs.config.allowUnfree = true;
-  environment.systemPackages = with pkgs; [ steam-run fuse fuse3 xdg-desktop-portal-hyprland];
+  environment.systemPackages = with pkgs; [ steam-run fuse fuse3 xdg-desktop-portal-hyprland jdk ];
 
   system.stateVersion = "24.05"; # Control the system states (settings filesys etc), recommended to keep at 24.05
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.trusted-users = [ "kinvp" ];
 }

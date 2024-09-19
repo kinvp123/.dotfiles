@@ -6,6 +6,19 @@
       enableCompletion = true;
       autosuggestion.enable = true;
       syntaxHighlighting.enable = true;
+      initExtra = "
+      source ~/.p10k.zsh
+      export GTK_IM_MODULE=ibus
+      export XMODIFIERS=@im=ibus
+      export QT_IM_MODULE=ibus
+      ";
+      
+      zplug = {
+        enable = true;
+        plugins = [
+          {name = "romkatv/powerlevel10k"; tags = [as:theme depth:1];}
+        ];
+      };
 
       shellAliases = {
         nixsw = "sudo nixos-rebuild switch --flake $HOME/.dotfiles/";
@@ -27,6 +40,9 @@
       enable = true;
       enableZshIntegration = true;
       catppuccin.enable = true;
+    };
+    ranger = {
+      enable = true;
     };
   };
 }
