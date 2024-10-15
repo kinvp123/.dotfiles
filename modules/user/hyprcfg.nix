@@ -27,6 +27,8 @@
 
           exec-once = [
             "waybar"
+            "swww-daemon > /dev/null 2>&1 &; disown"
+            "zen"
           ];
 
           bind = [

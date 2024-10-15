@@ -14,6 +14,7 @@
     wget
     unzip
     icu
+    gh
 
     ## [THEMING] ##	  
     pfetch-rs
@@ -27,6 +28,10 @@
     waybar
     pavucontrol
     zen-browser.default # [default, specific, generic]
+    arrpc
+    tree
+    ffmpeg
+    jq
 
     ## [EXTRAS] ##
     # Remember to wrap overrides in ()
@@ -40,5 +45,6 @@
   ]);
 
   programs.home-manager.enable = true;
+  services.arrpc.enable = true;
 }
 
