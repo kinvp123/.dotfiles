@@ -1,4 +1,4 @@
-{ zen-browser, pkgs-unstable, pkgs-gaming, config, pkgs, lib, ... }:
+{ zen-browser, pkgs-unstable, config, pkgs, lib, ... }:
 
 {
   imports = [ 
@@ -15,6 +15,7 @@
     unzip
     icu
     gh
+    corectrl
 
     ## [THEMING] ##	  
     pfetch-rs
@@ -32,6 +33,9 @@
     tree
     ffmpeg
     jq
+    vesktop
+    dissent
+
 
     ## [EXTRAS] ##
     # Remember to wrap overrides in ()
@@ -43,6 +47,10 @@
     ungoogled-chromium
     prismlauncher
   ]);
+
+#  (with pkgs-gaming; [
+#    osu-lazer-bin
+#  ]);
 
   programs.home-manager.enable = true;
   services.arrpc.enable = true;

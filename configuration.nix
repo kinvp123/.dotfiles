@@ -79,9 +79,7 @@
     ignoreShellProgramCheck = true;
   };
 
-  i18n.inputMethod = {
-    enabled = "ibus";
-    ibus.engines = with pkgs.ibus-engines; [
+  i18n.inputMethod = {    ibus.engines = with pkgs.ibus-engines; [
       bamboo
     ];
   };
@@ -101,9 +99,14 @@
   };
   
   nixpkgs.config.allowUnfree = true;
-  environment.systemPackages = with pkgs; [ steam-run fuse fuse3 xdg-desktop-portal-hyprland jdk ];
+  environment.systemPackages = with pkgs; [ steam-run fuse fuse3 xdg-desktop-portal-hyprland jdk obsidian ];
 
-  system.stateVersion = "24.05"; # Control the system states (settings filesys etc), recommended to keep at 24.05
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
-  nix.settings.trusted-users = [ "kinvp" ];
+  system.stateVersion = "24.05"; # Control the system states (settings filesys etc), recommended to keep at 24.05\
+  nix.settings = {
+    experimental-features = [ "nix-command" "flakes" ];
+    trusted-users = [ "kinvp" ];
+
+    substituters = ["https://nix-gaming.cachix.org"];
+    trusted-public-keys = ["nix-gaming.cachix.org-1:nbjlureqMbRAxR1gJ/f3hxemL9svXaZF/Ees8vCUUs4="];
+  };
 }

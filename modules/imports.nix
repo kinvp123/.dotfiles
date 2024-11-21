@@ -8,7 +8,6 @@
     ./user/hyprcfg.nix
     ./user/toficfg.nix
     ./user/waybarcfg.nix
-    ./user/eww.nix
 #    ./user/wpapercfg.nix
   ];
 }

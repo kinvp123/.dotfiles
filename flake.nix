@@ -17,7 +17,7 @@
     nix-gaming.url = "github:fufexan/nix-gaming";
   };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, zen-browser, catppuccin, ... } @ inputs: 
+  outputs = { self, nixpkgs, nixpkgs-unstable, nix-gaming, home-manager, zen-browser, catppuccin, ... } @ inputs: 
   let
       system = "x86_64-linux";
       lib = nixpkgs.lib;
