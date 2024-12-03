@@ -15,7 +15,6 @@
     unzip
     icu
     gh
-    corectrl
 
     ## [THEMING] ##	  
     pfetch-rs
@@ -34,8 +33,14 @@
     ffmpeg
     jq
     vesktop
-    dissent
+    flameshot
 
+    ## [I3] ##
+    i3blocks
+    i3status
+    i3-gaps
+    dmenu
+    feh
 
     ## [EXTRAS] ##
     # Remember to wrap overrides in ()
@@ -44,7 +49,6 @@
 
   ## [UNSTABLE] ##
   (with pkgs-unstable; [
-    ungoogled-chromium
     prismlauncher
   ]);
 

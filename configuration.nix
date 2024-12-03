@@ -10,6 +10,8 @@
   	loader.systemd-boot.enable = true;
   	loader.efi.canTouchEfiVariables = true;
 	  initrd.kernelModules = [ "amdgpu" ];
+    kernel.sysctl."kernel.sysrq" = 502;
+    kernelPackages = pkgs.linuxPackages_latest;
     kernelParams = [
       "quiet"
       "splash"
@@ -48,6 +50,7 @@
 		  enable = true;
 		  xkb.layout = "us";
 		  xkb.variant = "";
+      };
 	  };
 
 	  pipewire = {
@@ -61,10 +64,28 @@
       enable = true;
     };
     
-    displayManager.sddm.enable = true;
-    desktopManager.plasma6.enable = true;
+    displayManager = {
+      sddm.enable = true;
+      defaultSession = "none+i3"
+    };
 	  flatpak.enable = true;
   };
+
+  systemd = {
+  user.services.polkit-gnome-authentication-agent-1 = {
+    description = "polkit-gnome-authentication-agent-1";
+    wantedBy = ["graphical-session.target"];
+    wants = ["graphical-session.target"];
+    after = ["graphical-session.target"];
+    serviceConfig = {
+      Type = "simple";
+      ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+      Restart = "on-failure";
+      RestartSec = 1;
+      TimeoutStopSec = 10;
+    };
+  };
+};
 
   # Enable sound with pipewire.
   hardware.pulseaudio.enable = false;
@@ -79,7 +100,9 @@
     ignoreShellProgramCheck = true;
   };
 
-  i18n.inputMethod = {    ibus.engines = with pkgs.ibus-engines; [
+  i18n.inputMethod = {
+    enabled = "ibus";
+    ibus.engines = with pkgs.ibus-engines; [
       bamboo
     ];
   };
@@ -96,7 +119,11 @@
       package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
     };
     gamemode.enable = true;
+    corectrl = {
+      enable = true;
+      gpuOverclock.enable = true;
   };
+};
   
   nixpkgs.config.allowUnfree = true;
   environment.systemPackages = with pkgs; [ steam-run fuse fuse3 xdg-desktop-portal-hyprland jdk obsidian ];
