@@ -128,7 +128,7 @@
   nixpkgs.config.allowUnfree = true;
   environment.systemPackages = with pkgs; [ steam-run fuse fuse3 xdg-desktop-portal-hyprland jdk obsidian ];
 
-  system.stateVersion = "24.05"; # Control the system states (settings filesys etc), recommended to keep at 24.05\
+  system.stateVersion = "24.05"; # Control the system states (settings filesys etc), recommended to keep at 24.05
   nix.settings = {
     experimental-features = [ "nix-command" "flakes" ];
     trusted-users = [ "kinvp" ];

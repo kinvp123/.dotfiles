@@ -10,5 +10,6 @@
     ./user/waybarcfg.nix
     ./user/wpapercfg.nix
     ./user/i3cfg.nix
+    ./user/firefoxcfg.nix
   ];
 }

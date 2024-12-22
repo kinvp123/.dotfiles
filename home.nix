@@ -1,4 +1,4 @@
-{ zen-browser, pkgs-unstable, config, pkgs, lib, ... }:
+{ zen-browser, pkgs-unstable, pkgs-gaming, config, pkgs, lib, ... }:
 
 {
   imports = [ 
@@ -31,9 +31,9 @@
     arrpc
     tree
     ffmpeg
-    jq
     vesktop
     flameshot
+    libreoffice-qt
 
     ## [I3] ##
     i3blocks
@@ -50,11 +50,11 @@
   ## [UNSTABLE] ##
   (with pkgs-unstable; [
     prismlauncher
-  ]);
+  ]) ++
 
-#  (with pkgs-gaming; [
-#    osu-lazer-bin
-#  ]);
+  (with pkgs-gaming; [
+    osu-lazer-bin
+  ]);
 
   programs.home-manager.enable = true;
   services.arrpc.enable = true;
