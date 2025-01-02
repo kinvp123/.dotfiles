@@ -27,8 +27,8 @@
 
           exec-once = [
             "waybar"
-            "swww-daemon"
-            "zen"
+            "firefox"
+            "wpaperd -d"
           ];
 
           bind = [

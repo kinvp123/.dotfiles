@@ -50,6 +50,7 @@ in
             (extension "privacy-badger17" "jid1-MnnxcxisBPnSXQ@jetpack")
             (extension "sidetabs" "{ccc8cbaa-3c36-46d1-b0ae-d5e122755901}")
             (extension "custom-new-tab-page" "custom-new-tab-page@mint.as")
+            (extension "bitwarden-password-manager" "{446900e4-71c2-419f-a6a7-df9c091e268b}")
         ];
       Preferences = {
           "browser.newtabpage.activity-stream.feeds.section.topstories" = state-false;
@@ -62,7 +63,7 @@ in
           "browser.newtabpage.activity-stream.system.showSponsored" = state-false;
           "browser.newtabpage.activity-stream.showSponsoredTopSites" = state-false;
           "toolkit.legacyUserProfileCustomizations.stylesheets" = state-true;
-          "reader.parse-on-load.enabled" = state-false;
+          "reader.parse-on-load.enabled" = false;
       };
     };
   };

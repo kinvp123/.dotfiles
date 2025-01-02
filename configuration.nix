@@ -1,26 +1,45 @@
 { config, inputs, pkgs, ... }:
 {
-  imports =
-    [
-      ./hardware-configuration.nix
-    ];
+  imports =[ ./hardware-configuration.nix ];
 
   # Bootloader.
   boot = {
-  	loader.systemd-boot.enable = true;
-  	loader.efi.canTouchEfiVariables = true;
-	  initrd.kernelModules = [ "amdgpu" ];
-    kernel.sysctl."kernel.sysrq" = 502;
-    kernelPackages = pkgs.linuxPackages_latest;
+    plymouth = {
+      enable = true;
+      theme = "fade-in";
+    };
+    # Enable "Silent Boot"
+    consoleLogLevel = 0;
+    initrd.verbose = false;
     kernelParams = [
       "quiet"
       "splash"
+      "boot.shell_on_fail"
+      "loglevel=3"
+      "rd.systemd.show_status=false"
+      "rd.udev.log_level=3"
+      "udev.log_priority=3"
     ];
+    # Hide the OS choice for bootloaders. Press any key to bring it up.
+    loader = {
+      timeout = 2;
+      systemd-boot.enable = false;
+      efi.canTouchEfiVariables = true;
+      grub = {
+        enable = true;
+        efiSupport = true;
+        device = "nodev";
+      };
+    };
+
+	  initrd.kernelModules = [ "amdgpu" ];
+    kernel.sysctl."kernel.sysrq" = 502; # For CoreCtrl
+    kernelPackages = pkgs.linuxPackages_latest;
   };
-  networking.hostName = "nixos"; # Define your hostname.
 
   # Enable networking
   networking = {
+    hostName = "nixos";
     networkmanager.enable = true;
     nameservers = ["1.1.1.1" "1.0.0.1"];
     firewall.allowedTCPPorts = [ 22 ];
@@ -30,19 +49,26 @@
   time.timeZone = "Asia/Ho_Chi_Minh";
 
   # Select internationalisation properties.
-  i18n.defaultLocale = "en_US.UTF-8";
+  i18n = {
+    defaultLocale = "en_US.UTF-8";
+    extraLocaleSettings = {
+      LC_ADDRESS = "vi_VN";
+      LC_IDENTIFICATION = "vi_VN";
+      LC_MEASUREMENT = "vi_VN";
+      LC_MONETARY = "vi_VN";
+      LC_NAME = "vi_VN";
+      LC_NUMERIC = "vi_VN";
+      LC_PAPER = "vi_VN";
+      LC_TELEPHONE = "vi_VN";
+      LC_TIME = "vi_VN";
+    };
 
-
-  i18n.extraLocaleSettings = {
-    LC_ADDRESS = "vi_VN";
-    LC_IDENTIFICATION = "vi_VN";
-    LC_MEASUREMENT = "vi_VN";
-    LC_MONETARY = "vi_VN";
-    LC_NAME = "vi_VN";
-    LC_NUMERIC = "vi_VN";
-    LC_PAPER = "vi_VN";
-    LC_TELEPHONE = "vi_VN";
-    LC_TIME = "vi_VN";
+    inputMethod = {
+    enabled = "ibus";
+    ibus.engines = with pkgs.ibus-engines; [
+      bamboo
+      ];
+    };
   };
 
   services = {
@@ -51,7 +77,6 @@
 		  xkb.layout = "us";
 		  xkb.variant = "";
       };
-	  };
 
 	  pipewire = {
     	enable = true;
@@ -60,15 +85,11 @@
     	pulse.enable = true;
 	  };
 
-    openssh = {
-      enable = true;
-    };
-    
-    displayManager = {
-      sddm.enable = true;
-      defaultSession = "none+i3"
-    };
+    openssh.enable = true;
+    displayManager.sddm.enable = true;
 	  flatpak.enable = true;
+    # Volatile jctl logging, limited file size, speed up boot time with the tradeoff being no previous boot logs.
+    journald.extraConfig = "RuntimeMaxUse=32M SystemMaxUse==128M";
   };
 
   systemd = {
@@ -85,6 +106,7 @@
       TimeoutStopSec = 10;
     };
   };
+  services.NetworkManager-wait-online.enable = false;
 };
 
   # Enable sound with pipewire.
@@ -98,13 +120,6 @@
     extraGroups = [ "networkmanager" "wheel" "gamemode" ];
     shell = pkgs.zsh;
     ignoreShellProgramCheck = true;
-  };
-
-  i18n.inputMethod = {
-    enabled = "ibus";
-    ibus.engines = with pkgs.ibus-engines; [
-      bamboo
-    ];
   };
 
   programs = {
@@ -135,5 +150,12 @@
 
     substituters = ["https://nix-gaming.cachix.org"];
     trusted-public-keys = ["nix-gaming.cachix.org-1:nbjlureqMbRAxR1gJ/f3hxemL9svXaZF/Ees8vCUUs4="];
+
+    auto-optimise-store = true;
+  };
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 1w";
   };
 }
