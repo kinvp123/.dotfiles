@@ -22,7 +22,6 @@
           general = {
             gaps_in = 4;
             gaps_out  = 16;
-            "col.active_border" = "rgb(f5c2e7) rgb(cba6f7) 45deg";
           };
 
           exec-once = [

@@ -1,4 +1,4 @@
-{config, pkgs, ...}:
+{config, pkgs, lib, ...}:
 {
   programs = {
     zsh = {
@@ -30,9 +30,8 @@
     };
     kitty = {
       enable = true;
-      catppuccin.enable = true;
       shellIntegration.enableZshIntegration = true;
-      settings = {
+      settings = lib.mkForce {
         confirm_os_window_close = 0;
         background_opacity = "0.85";
         background_blur = 1;
@@ -41,7 +40,6 @@
     fzf = {
       enable = true;
       enableZshIntegration = true;
-      catppuccin.enable = true;
     };
     ranger = {
       enable = true;

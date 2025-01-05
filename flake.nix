@@ -7,17 +7,19 @@
   }; 
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
     nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
-    home-manager.url = "github:nix-community/home-manager/release-24.05";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
-    catppuccin.url = "github:catppuccin/nix";
-    hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
-    zen-browser.url = "github:MarceColl/zen-browser-flake";
     nix-gaming.url = "github:fufexan/nix-gaming";
+    nix-flatpak.url = "github:gmodena/nix-flatpak";
+
+    home-manager.url = "github:nix-community/home-manager/release-24.11";
+    home-manager.inputs.nixpkgs.follows = "nixpkgs";
+
+    zen-browser.url = "github:MarceColl/zen-browser-flake";
+    stylix.url = "github:danth/stylix/release-24.11";
   };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, nix-gaming, home-manager, zen-browser, catppuccin, ... } @ inputs: 
+  outputs = { self, nixpkgs, nixpkgs-unstable, nix-gaming, nix-flatpak, home-manager, zen-browser, stylix, ... } @ inputs: 
   let
       system = "x86_64-linux";
       lib = nixpkgs.lib;
@@ -35,7 +37,8 @@
         };
         modules = [ 
           ./home.nix
-          catppuccin.homeManagerModules.catppuccin 
+          stylix.homeManagerModules.stylix
+          nix-flatpak.homeManagerModules.nix-flatpak
         ];
         extraSpecialArgs = {
           inherit pkgs;

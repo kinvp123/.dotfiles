@@ -129,10 +129,7 @@
       dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
       localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
     };
-    hyprland = {
-      enable = true;
-      package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
-    };
+    hyprland.enable = true;
     gamemode.enable = true;
     corectrl = {
       enable = true;
@@ -141,7 +138,7 @@
 };
   
   nixpkgs.config.allowUnfree = true;
-  environment.systemPackages = with pkgs; [ steam-run fuse fuse3 xdg-desktop-portal-hyprland jdk obsidian ];
+  environment.systemPackages = with pkgs; [ steam-run fuse fuse3 jdk obsidian ];
 
   system.stateVersion = "24.05"; # Control the system states (settings filesys etc), recommended to keep at 24.05
   nix.settings = {

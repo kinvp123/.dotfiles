@@ -2,7 +2,7 @@
 {
   imports = [
     ./core/terminals.nix
-    ./theming/gtkqt.nix
+    ./theming/stylix.nix
     ./user/git.nix
     ./user/vscode.nix
     ./user/hyprcfg.nix
@@ -11,5 +11,6 @@
     ./user/wpapercfg.nix
     ./user/i3cfg.nix
     ./user/firefoxcfg.nix
+    ./user/flatpakcfg.nix
   ];
 }

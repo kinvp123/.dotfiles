@@ -1,56 +1,10 @@
-:root:is([tabsintitlebar], [sizemode="fullscreen"]) {
-    --uc-window-drag-space-pre: 30px; /* left side*/
-    --uc-window-drag-space-post: 30px; /* right side*/
-  }
-  
-  :root:is([tabsintitlebar][sizemode="maximized"], [sizemode="fullscreen"]) {
-    --uc-window-drag-space-pre: 0px; /* Remove pre space */
-  }
-  
-  /* Default width - used on Windows10+ */
-  :root:is([tabsintitlebar], [sizemode="fullscreen"]) {
-    --uc-window-control-width: 138px;
-  }
-  
-  @media  (-moz-platform: windows-win7),
-          (-moz-platform: windows-win8){
-    :root:is([tabsintitlebar], [sizemode="fullscreen"]) {
-      --uc-window-control-width: 105px;
-    }
-  }
-  /* On linux set width based on number of caption buttons.
-  One button */
-  @media (-moz-gtk-csd-minimize-button), (-moz-gtk-csd-maximize-button), (-moz-gtk-csd-close-button) {
-    :root:is([tabsintitlebar],[sizemode="fullscreen"]) {
-      --uc-window-control-width: 28px;
-    }
-  }
-  /* Two buttons */
-  @media (-moz-gtk-csd-minimize-button) and (-moz-gtk-csd-maximize-button),
-         (-moz-gtk-csd-minimize-button) and (-moz-gtk-csd-close-button),
-         (-moz-gtk-csd-maximize-button) and (-moz-gtk-csd-close-button) {
-    :root:is([tabsintitlebar],[sizemode="fullscreen"]) {
-      --uc-window-control-width: 56px;
-    }
-  }
-  /* Three buttons */
+  /* On linux set width based on number of caption buttons.*/
+  /* Three buttons (hidden)*/
   @media (-moz-gtk-csd-minimize-button) and (-moz-gtk-csd-maximize-button) and (-moz-gtk-csd-close-button) {
     :root:is([tabsintitlebar],[sizemode="fullscreen"]) {
-      --uc-window-control-width: 84px;
+      --uc-window-control-width: -28px;
     }
   }
-  
-  @media (-moz-platform: macos){
-    :root:is([tabsintitlebar]) {
-      --uc-window-control-width: 72px;
-    }
-    :root:is([tabsintitlebar][sizemode="fullscreen"]) {
-      --uc-window-control-width: 0;
-    }
-  }
-  
-  .titlebar-buttonbox{ color: var(--toolbar-color) }
-  :root[sizemode="fullscreen"] .titlebar-buttonbox-container{ display: none }
   
   :root[sizemode="fullscreen"] #TabsToolbar > .titlebar-buttonbox-container:last-child{
     position: absolute;
@@ -137,3 +91,5 @@
   pointer-events: none;
   margin-left: var(--uc-window-drag-space-pre,0px)
 }
+
+.titlebar-buttonbox-container {display:none !important;} /* :trol: */
