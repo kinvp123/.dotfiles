@@ -11,6 +11,5 @@
     ./user/wpapercfg.nix
     ./user/i3cfg.nix
     ./user/firefoxcfg.nix
-    ./user/flatpakcfg.nix
   ];
 }

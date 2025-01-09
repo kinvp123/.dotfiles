@@ -10,7 +10,7 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
     nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
     nix-gaming.url = "github:fufexan/nix-gaming";
-    nix-flatpak.url = "github:gmodena/nix-flatpak";
+    nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=v0.5.2";
 
     home-manager.url = "github:nix-community/home-manager/release-24.11";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
@@ -23,28 +23,28 @@
   let
       system = "x86_64-linux";
       lib = nixpkgs.lib;
-      pkgs = nixpkgs.legacyPackages.${system};
+      pkgs = import nixpkgs {
+        inherit system;
+        config.allowUnfree = true;
+      };
       pkgs-unstable = nixpkgs-unstable.legacyPackages.${system};
-      zen-browser = inputs.zen-browser.packages.${system};
-      pkgs-gaming = inputs.nix-gaming.packages.${system};
+      flake-inputs = inputs;
   in
   {
     homeConfigurations = {
       "kinvp" = home-manager.lib.homeManagerConfiguration {
-        pkgs = import nixpkgs {
-          inherit system;
-          config.allowUnfree = true;
-        };
+        inherit pkgs;
         modules = [ 
           ./home.nix
           stylix.homeManagerModules.stylix
-          nix-flatpak.homeManagerModules.nix-flatpak
         ];
         extraSpecialArgs = {
           inherit pkgs;
           inherit pkgs-unstable;
-          inherit pkgs-gaming;
-          inherit zen-browser;
+          inherit flake-inputs;
+
+          zen-browser = inputs.zen-browser.packages.${system};
+          pkgs-gaming = inputs.nix-gaming.packages.${system};
         };
       };
     };
@@ -52,9 +52,11 @@
       inherit system;
       modules = [
         ./configuration.nix
+        nix-flatpak.nixosModules.nix-flatpak
       ];
       specialArgs = {
-        inherit inputs;
+        inherit flake-inputs;
+        inherit pkgs;
         inherit pkgs-unstable;
       };
     };
